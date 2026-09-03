@@ -7,12 +7,16 @@ class Agent {
     this.senseLen = 10 * cellSize;
     this.turnAngle = 0.2 * PI;
     this.randomAngle = 0.5;
-    this.binNo = int(random(1, bins));
+    this.binNo = int(random(bins));
     this.amp = 1;
+    this.freqHue = map(this.binNo, 0, bins, 0, 360);
+    this.ampSatBri = map(this.amp, 0, 256, 0, 100);
+    this.img_index = floor(map(this.binNo, 0, bins, 0, images.length))
   }
   
   update(amp) {
     this.amp = max(1, amp);
+    this.ampSatBri = map(this.amp, 0, 256, 0, 100);
     
     let sensorDict = {
       sensorLeft: [this.getScent(this.senseAngle), this.senseAngle],
@@ -44,7 +48,8 @@ class Agent {
   placeScent() {
     let x = Math.floor(this.pos.x/cellSize) % gridWidth; // column
     let y = Math.floor(this.pos.y/cellSize) % gridHeight; // row
-    scent[y][x] += scentAmount;
+    scent[y][x][1] += this.ampSatBri;
+    scent[y][x][0] = this.freqHue;
   }
   
   getScent(angle) {
@@ -54,17 +59,20 @@ class Agent {
     y = (y + height) % height;
     x = Math.floor(x/cellSize) % gridWidth;
     y = Math.floor(y/cellSize) % gridHeight;
-    return(scent[y][x]);
+    return(scent[y][x][1]);
   }
   
   display() {
     //stroke(0);
     //fill(300, 100, 100);
     push();
-    // image(strawb, this.pos.x, this.pos.y);
-    strawb.resize(cellSize*2, cellSize*2);
-    image(strawb, this.pos.x, this.pos.y);
-    //translate(this.pos.x, this.pos.y);
+    if (images[this.img_index] == eye) {
+      images[this.img_index].resize(cellSize*2, cellSize);
+    } else {
+      images[this.img_index].resize(cellSize*2, cellSize*2);
+    }
+    image(images[this.img_index], this.pos.x, this.pos.y);
+    translate(this.pos.x, this.pos.y);
     //rotate(this.vel.heading());
     //rect(0, 0, cellSize * 2, cellSize * 2);
     //line(0, 0, 10, 0);
