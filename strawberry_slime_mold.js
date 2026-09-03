@@ -1,18 +1,25 @@
 let agents = [];
 let scent = [];
 let tempDiffuse = [];
-let gridWidth;
-let gridHeight;
+
 let cellSize = 15
 let scentAmount = 10;
-let evaporation_rate = 0.9;
+let evaporation_rate = 0.99;
 let kernel = [[1, 1, 1], [1, 2, 1], [1, 1, 1]];
 let kernelCount = 10;
-let numAgents = 100;// gridWidth * gridHeight * 0.5
+let numAgents = 25;
+let bins = 16
 
+let gridWidth;
+let gridHeight;
+let button;
 let strawb;
+let song;
+let fft;
+
 function preload() {
   strawb = loadImage("data/strawberry.png");
+  song = loadSound("data/Strawberry_Fields_Forever.mp3");
 }
 
 function setup() {
@@ -29,6 +36,10 @@ function setup() {
     for (let col = 0; col < gridWidth; col++) {
       scent[row][col] = random(100); // random scents in grid
     }
+    
+    for (let col = 0; col < gridWidth / 2; col++) {
+      scent[row][col] = random(100, 300); // environment bias
+    }
   }
   
   for(let row = 0; row < gridHeight; row++) {
@@ -41,15 +52,39 @@ function setup() {
   for(let i = 0; i < numAgents; i++) {
     agents.push(new Agent());
   }
+  
+  for(let i = 0; i < agents.length; i++) { console.log(agents[i].binNo); }
+  
+  button = createButton("toggle");
+  button.mousePressed(toggleSong);
+  song.play();
+  fft = new p5.FFT(0, bins);
 }
 
+function toggleSong() {
+  if (song.isPlaying()) {
+    song.pause();
+  } else {
+    song.play();
+  }
+}
 
 function draw() {
-  for(let a of agents) {
-    a.update();
+  let spectrum = fft.analyze();
+  
+  for(let i = 0; i < spectrum.length; i++) {
+    if (spectrum[i] > 0) {
+      for (let a of agents) {
+        if (a.binNo == i) {
+          a.update(spectrum[i]);
+        }
+      }
+    }
+    
   }
+  
   fadeScent();
-  diffuseScent();
+  diffuseScent(); // makes agents converge into nuclei faster
   displayScent();
   for(let a of agents) {
     a.display();
@@ -84,7 +119,7 @@ function weighted_avg(row, col) {
 
 function fadeScent() {
   for(let row = 0; row < gridHeight; row++) {
-    for (let col = 0; col < gridWidth; col++) {
+    for (let col = gridWidth / 2; col < gridWidth; col++) {
       scent[row][col] *= evaporation_rate;
     }
   }
