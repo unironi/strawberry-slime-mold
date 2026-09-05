@@ -9,6 +9,7 @@ Some screen recordings of the slime mold agents dancing:
 - Strawberry Fields Forever: https://www.instagram.com/p/Dcz83UUBG43/
 
 Some cool progress pics:
+
 <img width="717" height="801" alt="strawb_sma_4" src="https://github.com/user-attachments/assets/ddae1a09-f29a-4e5b-aecd-1a7086696f6c" />
 <img width="719" height="806" alt="strawb_sma_5" src="https://github.com/user-attachments/assets/83c4e830-d173-4871-91f2-66a8d7a5df7f" />
 <img width="712" height="799" alt="strawb_sma_6" src="https://github.com/user-attachments/assets/55ca977a-d724-4064-8cf1-672b842cd91d" />
