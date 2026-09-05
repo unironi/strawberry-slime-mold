@@ -8,6 +8,8 @@ Some screen recordings of the slime mold agents dancing:
 - A Case of You (a little laggy, I should've used less agents): https://www.instagram.com/p/Dc1xVXCBKD9/
 - Strawberry Fields Forever: https://www.instagram.com/p/Dcz83UUBG43/
 
+Except for the realistic strawberry sprites, I drew all the sprites using my trackpad on Krita
+
 Some cool progress pics:
 
 <img width="717" height="801" alt="strawb_sma_4" src="https://github.com/user-attachments/assets/ddae1a09-f29a-4e5b-aecd-1a7086696f6c" />
