@@ -17,5 +17,6 @@ Some cool progress pics:
 <img width="716" height="773" alt="strawb_sma_1" src="https://github.com/user-attachments/assets/822f7031-ab35-4f20-a0cc-a9fbb1571df0" />
 <img width="704" height="789" alt="strawb_sma_2" src="https://github.com/user-attachments/assets/ec579620-7144-443c-a251-b842eeda63aa" />
 <img width="672" height="723" alt="strawb_sma_3" src="https://github.com/user-attachments/assets/e0400baa-5e0a-4d99-9b43-8191a37138f2" />
+<img width="1588" height="1654" alt="Screenshot 2026-09-04 at 11 18 52 PM" src="https://github.com/user-attachments/assets/1725699c-874b-4da3-b2e9-25a07b95afee" />
 
 
